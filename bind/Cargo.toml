@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+ciborium = "0.2.2"
 justcash_prove = "0.1.2"
 uniffi = { version = "0.30", features = [ "cli" ] }
 
