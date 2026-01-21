@@ -15,7 +15,8 @@ fn main() {
 fn try_main() -> Result<(), DynError> {
     let task = env::args().nth(1);
     match task.as_deref() {
-        Some("build") => dist()?,
+        Some("build") => build()?,
+        Some("publish") => publish()?,
         _ => print_help(),
     }
     Ok(())
@@ -30,11 +31,18 @@ build	builds application
     )
 }
 
-fn dist() -> Result<(), DynError> {
+fn build() -> Result<(), DynError> {
     let sh = Shell::new()?;
 
     cmd!(sh, "cargo ndk -t armeabi-v7a -t arm64-v8a -t x86_64 -o ./jclib/src/main/jniLibs/ build --release").run()?;
     cmd!(sh, "cargo run --bin uniffi-bindgen generate --library ./jclib/src/main/jniLibs/x86_64/libjustcash.so --language kotlin --out-dir jclib/src/main/java/").run()?;
     cmd!(sh, "./gradlew build").run()?;
+    Ok(())
+}
+
+fn publish() -> Result<(), DynError> {
+    let sh = Shell::new()?;
+    build()?;
+    cmd!(sh, "./gradle publish").run()?;
     Ok(())
 }
