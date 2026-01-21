@@ -43,6 +43,6 @@ fn build() -> Result<(), DynError> {
 fn publish() -> Result<(), DynError> {
     let sh = Shell::new()?;
     build()?;
-    cmd!(sh, "./gradle publish").run()?;
+    cmd!(sh, "./gradlew publish").run()?;
     Ok(())
 }
