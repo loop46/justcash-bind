@@ -15,7 +15,7 @@ fn main() {
 fn try_main() -> Result<(), DynError> {
     let task = env::args().nth(1);
     match task.as_deref() {
-        Some("dist") => dist()?,
+        Some("build") => dist()?,
         _ => print_help(),
     }
     Ok(())
@@ -25,7 +25,7 @@ fn print_help() {
     eprintln!(
         "Tasks:
 
-dist            builds application
+build	builds application
 "
     )
 }
