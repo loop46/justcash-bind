@@ -28,7 +28,7 @@ impl std::fmt::Display for ProveError {
 }
 
 #[uniffi::export]
-pub async fn prove(input: Input) -> Result<Vec<u8>, ProveError> {
+pub fn prove(input: Input) -> Result<Vec<u8>, ProveError> {
     let rec = jc_prove(justcash_prove::Input {
         hashes: input
             .hashes
