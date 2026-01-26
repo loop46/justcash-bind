@@ -9,7 +9,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "com.loop46"
             artifactId = "justcash"
-            version = "0.0.1"
+            version = "0.0.2"
 
             afterEvaluate {
                 from(components["release"])
